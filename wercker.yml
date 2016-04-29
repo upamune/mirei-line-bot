@@ -7,9 +7,6 @@ build:
         method: get
     - keima/go-appengine-util:
         cwd: $WERCKER_SOURCE_DIR
-        method: test
-    - keima/go-appengine-util:
-        cwd: $WERCKER_SOURCE_DIR
         method: build
 
 deploy:
