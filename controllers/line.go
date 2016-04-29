@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo"
-	"github.com/line/line-bot-sdk-go/linebot"
+	"github.com/upamune/line-bot-sdk-go/linebot"
 	"github.com/upamune/mirei-line-bot/services"
 	"google.golang.org/appengine"
 	"google.golang.org/appengine/log"
@@ -18,10 +18,7 @@ func LineCallBackHandler(c echo.Context) error {
 	ctx := appengine.NewContext(request)
 	client := urlfetch.Client(ctx)
 
-	bot, err := services.GetLineClient(client)
-	if err != nil {
-		log.Errorf(ctx, "Line Clinet Error: %v", err)
-	}
+	bot := services.GetLineClient(client)
 	received, err := bot.ParseRequest(request)
 	if err != nil {
 		log.Errorf(ctx, "Request Parse Error: %v", err)
