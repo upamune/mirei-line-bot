@@ -1,6 +1,6 @@
 // +build !appengine
 
-package main
+package app
 
 import (
 	"github.com/labstack/echo/engine/standard"
