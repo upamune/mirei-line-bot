@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"github.com/labstack/echo/engine/standard"
 	"google.golang.org/appengine/urlfetch"
 	"net/http"
 
@@ -10,7 +11,6 @@ import (
 	"google.golang.org/appengine"
 	"google.golang.org/appengine/log"
 	"sync"
-	"github.com/labstack/echo/engine/standard"
 )
 
 func LineCallBackHandler(c echo.Context) error {
