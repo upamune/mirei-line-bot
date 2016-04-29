@@ -34,15 +34,39 @@ func LineCallBackHandler(c echo.Context) error {
 		go func(result *linebot.ReceivedResult) {
 			defer wg.Done()
 			content := result.Content()
-			if content != nil && content.IsMessage && content.ContentType == linebot.ContentTypeText {
-				// すでにifでチェックしているので，ここのエラーは握り潰しても良い
-				textContent, _ := content.TextContent()
-				res, err := bot.SendText([]string{content.From}, textContent.Text+"ぷり")
-				if err != nil {
-					log.Errorf(ctx, "Send Message Text Error: %v", err)
-					return
+			if content != nil && content.IsMessage {
+				switch content.ContentType {
+				case linebot.ContentTypeText:
+					// すでにifでチェックしているので，ここのエラーは握り潰しても良い
+					textContent, _ := content.TextContent()
+					res, err := bot.SendText([]string{content.From}, textContent.Text+"ぷり")
+					if err != nil {
+						log.Errorf(ctx, "Send Message Text Error: %v", err)
+						return
+					}
+					log.Infof(ctx, "Succeed Sent Messages: %v", res)
+				case linebot.ContentTypeImage:
+					res, err := bot.SendText([]string{content.From}, "いい写真ぷり!")
+					if err != nil {
+						log.Errorf(ctx, "Send Message Text Error: %v", err)
+						return
+					}
+					log.Infof(ctx, "Succeed Sent Messages: %v", res)
+				case linebot.ContentTypeLocation:
+					res, err := bot.SendText([]string{content.From}, "素敵な場所ぷりね")
+					if err != nil {
+						log.Errorf(ctx, "Send Message Text Error: %v", err)
+						return
+					}
+					log.Infof(ctx, "Succeed Sent Messages: %v", res)
+				case linebot.ContentTypeSticker:
+					res, err := bot.SendText([]string{content.From}, "いいスタンプぷり! みれぃのスタンプも買って欲しいぷり💕")
+					if err != nil {
+						log.Errorf(ctx, "Send Message Text Error: %v", err)
+						return
+					}
+					log.Infof(ctx, "Succeed Sent Messages: %v", res)
 				}
-				log.Infof(ctx, "Succeed Sent Messages: %v", res)
 			}
 		}(&result)
 	}
