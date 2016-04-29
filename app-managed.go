@@ -1,4 +1,4 @@
-// +build appenginevm
+// +build appengine,appenginevm
 
 package main
 
