@@ -18,3 +18,5 @@ func createMux() *echo.Echo {
 
 	return e
 }
+func main() {
+}
