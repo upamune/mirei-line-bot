@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo"
-	"github.com/labstack/echo/engine/standard"
+	"github.com/labstack/echo/engine/fasthttp"
 	"google.golang.org/appengine"
 )
 
@@ -17,7 +17,7 @@ func createMux() *echo.Echo {
 }
 
 func main() {
-	s := standard.New(":8080")
+	s := fasthttp.New(":8080")
 	s.SetHandler(e)
 	http.Handle("/", s)
 	appengine.Main()

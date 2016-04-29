@@ -6,13 +6,13 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo"
-	"github.com/labstack/echo/engine/standard"
+	"github.com/labstack/echo/engine/fasthttp"
 )
 
 func createMux() *echo.Echo {
 	e := echo.New()
 
-	s := standard.New("")
+	s := fasthttp.New("")
 	s.SetHandler(e)
 	http.Handle("/", s)
 
