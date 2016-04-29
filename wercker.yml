@@ -1,0 +1,20 @@
+box: golang
+build:
+  steps:
+    - setup-go-workspace
+    - keima/go-appengine-util:
+        cwd: $WERCKER_SOURCE_DIR
+        method: get
+    - keima/go-appengine-util:
+        cwd: $WERCKER_SOURCE_DIR
+        method: test
+    - keima/go-appengine-util:
+        cwd: $WERCKER_SOURCE_DIR
+        method: build
+
+deploy:
+  steps:
+  - keima/go-appengine-util:
+      method: deploy
+      cwd: $WERCKER_SOURCE_DIR
+      token: $APP_ENGINE_TOKEN
